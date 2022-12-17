@@ -1,0 +1,63 @@
+using namespace std;
+#include <iostream>
+
+struct Node{
+    int data;
+    Node* next;
+};
+class List{
+public:
+    List();
+    void insert_to_front(int n);
+    void display() const;
+    void insert_to_back(int n);
+
+private:
+    Node* head;
+};
+List::List(){
+    head = 0;
+}
+void List::insert_to_front(int n){
+    Node* newnode;
+    newnode = new Node;
+    newnode->next= head;
+    newnode->data = n;
+    head = newnode;
+}
+void List::insert_to_back(int n){
+    Node*  backnode;
+    backnode = new Node;
+    backnode->data = n;
+    backnode->next = NULL;
+    //if list is empty backnode will be head
+    if(head == NULL){
+        head = backnode;
+    }
+    //find last node
+    Node* last = head;
+    while(last->next != NULL){
+        last = last->next; //this loop checks for the last node as last node points to NULL
+    }
+    //insert new node to last
+    last->next = backnode;
+    
+}
+
+void List::display() const{
+    Node* ptr = head;
+    cout << "\nList contains: ";
+    while (ptr !=NULL){
+        cout<< " " << ptr->data;
+        ptr = ptr ->next;
+    }
+}
+int main() {
+
+    List x;
+    x.insert_to_front(20);
+    x.insert_to_front(15);
+    x.insert_to_back(22);
+    x.insert_to_back(33);
+    x.display();
+}
