@@ -11,6 +11,7 @@ public:
     void insert_to_front(int n);
     void display() const;
     void insert_to_back(int n);
+    void pop_front();
 
 private:
     Node* head;
@@ -25,6 +26,20 @@ void List::insert_to_front(int n){
     newnode->data = n;
     head = newnode;
 }
+void List::pop_front(){
+    Node* curr = head;
+    Node* prev = NULL;
+    Node* n;
+    while(curr != NULL){
+        n = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = n;
+    }
+    head = prev;
+    }
+
+
 void List::insert_to_back(int n){
     Node*  backnode;
     backnode = new Node;
@@ -59,5 +74,6 @@ int main() {
     x.insert_to_front(15);
     x.insert_to_back(22);
     x.insert_to_back(33);
+    x.pop_front();
     x.display();
 }
